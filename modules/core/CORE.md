@@ -1,6 +1,6 @@
 # core.py — Documentação do Núcleo Comum
 
-Este arquivo documenta tudo que as Pessoas 2, 3 e 4 precisam saber para usar o núcleo sem precisar ler o código.
+Este arquivo documenta tudo que precisam saber para usar o núcleo sem precisar ler o código.
 
 ---
 
@@ -160,7 +160,7 @@ OUT[ 3 ] = { }           IN[ 3 ] = { a , b }
 
 ## Como cada análise usa o motor
 
-### Pessoa 2 — Liveness
+### Liveness
 
 ```python
 result = run_dataflow(
@@ -172,7 +172,7 @@ result = run_dataflow(
 )
 ```
 
-### Pessoa 3 — Reaching Definitions
+### Reaching Definitions
 
 ```python
 result = run_dataflow(
@@ -186,7 +186,7 @@ result = run_dataflow(
 
 > **Atenção:** os elementos de `IN`/`OUT` aqui não são nomes de variáveis, mas pares `(variavel, line_id)` — porque duas definições da mesma variável em linhas diferentes são elementos distintos.
 
-### Pessoa 4 — Available Expressions
+### Available Expressions
 
 ```python
 result = run_dataflow(
