@@ -195,3 +195,23 @@ def parse_input(source: Union[str, List[str]]) -> CFG:
 
     return CFG(blocks=blocks, block_order=block_order)
 
+
+# Funcoes de juncao
+def union(sets_list: List[Set]) -> Set:
+
+
+    result = set()
+    for s in sets_list:
+        result |= s
+    return result
+
+
+def intersection(sets_list: List[Set]) -> Set:
+   
+    if not sets_list:
+        return set()
+    result = sets_list[0].copy()
+    for s in sets_list[1:]:
+        result &= s
+    return result
+
