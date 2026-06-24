@@ -13,7 +13,7 @@ A única coisa que precisa ser combinada **antes de codar** é o "contrato" abai
 
 ---
 
-## Pessoa 1 — Núcleo comum (parser + CFG + motor de fluxo de dados)
+## Pessoa 1 (Kauan) — Núcleo comum (parser + CFG + motor de fluxo de dados)
 
 Esta é a entrega mais crítica do trabalho. Tudo depende dela, então deve ser a primeira a ficar pronta — mesmo que de forma simples no início, refinando depois.
 
@@ -298,19 +298,3 @@ print_resultado("Liveness", liveness(cfg))
 print_resultado("Reaching Definitions", reaching_definitions(cfg))
 print_resultado("Available Expressions", available_expressions(cfg))
 ```
-
----
-
-## Combinados que a equipe precisa travar ANTES de codar
-
-1. **Linguagem única** — todos no mesmo Python (ou outra linguagem escolhida em conjunto), para evitar incompatibilidade na hora de juntar.
-2. **Nomes dos campos do CFG** — exatamente como descrito na seção 1.2 (`block.id`, `block.successors`, `block.predecessors`, `block.instructions`).
-3. **Assinatura das três funções de análise** — exatamente como descrito nas seções de cada pessoa (`liveness(cfg)`, `reaching_definitions(cfg)`, `available_expressions(cfg)`), todas devolvendo `dict[int, tuple[set, set]]`.
-4. **Formato de impressão** — usar a função utilitária da Pessoa 1, e não cada um inventar o próprio formato de saída.
-
-## Sugestões extras para reduzir risco de falha
-
-- **Revisão cruzada antes do envio**: cada pessoa lê rapidamente o código de um colega (não precisa ser profundo, só verificar se a lógica de gen/kill bate com a explicação acima).
-- **Casos de teste compartilhados**: usar os mesmos 2-3 arquivos de entrada (incluindo o do enunciado) nas três análises — isso facilita comparar resultados entre si e detectar inconsistência de leitura do grafo.
-- **Arquivo com nomes da equipe**: não esquecer de incluir, como exige o enunciado, um arquivo com o nome de todos os membros dentro da pasta zipada — e confirmar que são pelo menos 3 alunos, já que menos que isso zera o trabalho automaticamente.
-- **Entregar antes do prazo final** (26/06/2026), como o próprio professor recomenda, para ter margem de reação a qualquer imprevisto de última hora.
