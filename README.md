@@ -36,7 +36,7 @@ trabalho2-compiladores/
 │   ├── __init__.py
 │   ├── core/                                 # Núcleo comum 
 │   │   ├── __init__.py
-        ├── CORE.md
+|   |   ├── CORE.md
 │   │   ├── core.py
 │   │   └── test_core.py
 │   ├── liveness/                             # Questão 1
