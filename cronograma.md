@@ -1,9 +1,4 @@
 # Roteiro do Trabalho II — Opção 3 (Análises de Fluxo)
-### Compiladores — Prof. Lucas Ismaily — UFC Quixadá
-
-Este documento é o "contrato técnico" da equipe: define exatamente o que cada pessoa entrega, como ela acessa o núcleo comum, e como as quatro partes se encaixam sem que ninguém precise esperar ninguém.
-
----
 
 ## Princípio geral da divisão
 
