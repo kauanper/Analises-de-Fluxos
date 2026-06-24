@@ -85,8 +85,9 @@ modulo/
 ├── modulo.py        # implementação da análise
 └── test_modulo.py   # testes, executável de forma independente
 ```
+
 O arquivo de teste de cada módulo pode ser rodado de forma isolada, sem precisar que os outros módulos estejam prontos. Cada pessoa pode implementar e validar sua análise independentemente, apenas importando o núcleo comum (`modules.core.core`) e usando os arquivos de entrada da pasta `examples/` como base de comparação. Isso significa que não há dependência de implementação entre as análises.
----
+
 
 ### core — Núcleo comum
 **Responsável:** Francisco Kauan Pereira Cavalcante
