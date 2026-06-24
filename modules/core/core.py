@@ -215,6 +215,7 @@ def intersection(sets_list: List[Set]) -> Set:
         result &= s
     return result
 
+
 # Motor generico de fluxo de dados
 def run_dataflow(
     cfg: CFG,
@@ -223,7 +224,7 @@ def run_dataflow(
     gen_func: Callable[[BasicBlock], Set],
     kill_func: Callable[[BasicBlock], Set],
 ) -> Dict[int, Tuple[Set, Set]]:
-    
+
     if direction not in ("forward", "backward"):
         raise ValueError("direction deve ser 'forward' ou 'backward'")
 
@@ -250,3 +251,23 @@ def run_dataflow(
             OUT[block.id] = new_out
 
     return {bid: (IN[bid], OUT[bid]) for bid in cfg.blocks}
+
+
+# Impressao padronizada
+def _format_set(s: Set) -> str:
+    if not s:
+        return "{ }"
+    return "{ " + " , ".join(sorted(str(x) for x in s)) + " }"
+
+
+def print_result(
+    analysis_name: str,
+    result: Dict[int, Tuple[Set, Set]],
+    block_order: Optional[List[int]] = None,
+) -> None:
+    print(f"--- {analysis_name} ---")
+    ids = block_order if block_order is not None else sorted(result.keys())
+    for bid in ids:
+        IN, OUT = result[bid]
+        print(f"OUT[ {bid} ] = {_format_set(OUT)}     IN[ {bid} ] = {_format_set(IN)}")
+    print()
