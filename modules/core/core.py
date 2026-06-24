@@ -1,26 +1,3 @@
-"""
-Nucleo comum do projeto
-
-Exporta:
-    parse_input(source)      -> CFG
-    union(sets_list)         -> set
-    intersection(sets_list)  -> set
-    run_dataflow(...)        -> dict[int, tuple[set, set]]
-    print_result(...)        -> None
-
-Formato de entrada (enunciado, Trabalho II, Opcao 3):
-    Cada bloco e descrito por:
-        1. Cabecalho "N M"   — N: id do bloco, M: qtd de instrucoes
-        2. M linhas de codigo de 3 enderecos  (ex: "a = a+c", "b=20*c")
-        3. Linha de sucessores               (ex: "2 3" ou "0" se nao houver)
-    Esse padrao se repete para cada bloco, um apos o outro.
-
-Nomes dos campos (contrato com os outros modulos):
-    Instruction:  line_id, destination, operand1, operator, operand2, raw_text
-    BasicBlock:   id, instructions, successors, predecessors
-    CFG:          blocks, block_order
-"""
-
 from dataclasses import dataclass, field
 from typing import Optional, Callable, Union, List, Dict, Set, Tuple
 
