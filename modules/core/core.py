@@ -215,3 +215,38 @@ def intersection(sets_list: List[Set]) -> Set:
         result &= s
     return result
 
+# Motor generico de fluxo de dados
+def run_dataflow(
+    cfg: CFG,
+    direction: str,
+    join: Callable[[List[Set]], Set],
+    gen_func: Callable[[BasicBlock], Set],
+    kill_func: Callable[[BasicBlock], Set],
+) -> Dict[int, Tuple[Set, Set]]:
+    
+    if direction not in ("forward", "backward"):
+        raise ValueError("direction deve ser 'forward' ou 'backward'")
+
+    IN: Dict[int, Set] = {bid: set() for bid in cfg.blocks}
+    OUT: Dict[int, Set] = {bid: set() for bid in cfg.blocks}
+
+    changed = True
+    while changed:
+        changed = False
+        for block in cfg.all_blocks():
+            gen = gen_func(block)
+            kill = kill_func(block)
+
+            if direction == "forward":
+                new_in = join([OUT[p] for p in block.predecessors])
+                new_out = gen | (new_in - kill)
+            else:
+                new_out = join([IN[s] for s in block.successors])
+                new_in = gen | (new_out - kill)
+
+            if new_in != IN[block.id] or new_out != OUT[block.id]:
+                changed = True
+            IN[block.id] = new_in
+            OUT[block.id] = new_out
+
+    return {bid: (IN[bid], OUT[bid]) for bid in cfg.blocks}
