@@ -57,27 +57,29 @@ trabalho2-compiladores/
 ```
 
 ---
-
+ 
 ## Como executar
-
+ 
 Todos os comandos devem ser rodados a partir da **raiz do projeto**.
-
+ 
 ### Integração completa
 ```bash
 python main.py examples/example_statement.txt
 ```
-
-### Testes de cada módulo
-```bash
-python -m modules.core.test_core
-python -m modules.liveness.test_liveness
-python -m modules.reaching_definitions.test_reaching_definitions
-python -m modules.available_expressions.test_available_expressions
-```
-
----
-
 ## Módulos
+ 
+Cada submódulo segue a mesma estrutura:
+ 
+```
+modulo/
+├── __init__.py
+├── modulo.py        # implementação da análise
+└── test_modulo.py   # testes, executável de forma independente
+```
+ 
+O arquivo de teste de cada módulo pode ser rodado de forma isolada — sem precisar que os outros módulos estejam prontos — e valida a análise contra os exemplos da pasta `examples/`.
+ 
+---
 
 ### core — Núcleo comum
 **Responsável:** Francisco Kauan Pereira Cavalcante
