@@ -109,3 +109,89 @@ class CFG:
         for block in self.all_blocks():
             for instr in block.instructions:
                 yield instr
+
+
+# Parser
+def _parse_instruction_line(line: str, line_id: int) -> Instruction:
+    raw_text = line.strip()
+    destination, expression = raw_text.split("=", 1)
+    destination = destination.strip()
+    expression = expression.strip()
+
+    for op in ["+", "-", "*", "/"]:
+        idx = expression.find(op, 1) 
+        if idx != -1:
+            return Instruction(
+                line_id=line_id,
+                destination=destination,
+                operand1=expression[:idx].strip(),
+                operator=op,
+                operand2=expression[idx + 1:].strip(),
+                raw_text=raw_text,
+            )
+
+    return Instruction(
+        line_id=line_id,
+        destination=destination,
+        operand1=expression,
+        operator=None,
+        operand2=None,
+        raw_text=raw_text,
+    )
+
+
+def parse_input(source: Union[str, List[str]]) -> CFG:
+    
+    if isinstance(source, str):
+        with open(source, "r", encoding="utf-8") as f:
+            raw_lines = f.readlines()
+    else:
+        raw_lines = list(source)
+
+    lines = [l.strip() for l in raw_lines if l.strip() != ""]
+    if not lines:
+        raise ValueError("Entrada vazia.")
+
+    blocks: Dict[int, BasicBlock] = {}
+    block_order: List[int] = []
+    global_line_counter = 0
+    i = 0
+
+    while i < len(lines):
+        
+        header = lines[i].split()
+        
+        if len(header) != 2:
+            raise ValueError(f"Cabecalho invalido na linha {i}: '{lines[i]}'")
+        block_id, num_instructions = int(header[0]), int(header[1])
+        
+        i += 1
+
+        instructions: List[Instruction] = []
+        for _ in range(num_instructions):
+            if i >= len(lines):
+                raise ValueError(f"Entrada truncada no bloco {block_id}.")
+            global_line_counter += 1
+            instructions.append(_parse_instruction_line(lines[i], global_line_counter))
+            i += 1
+
+        if i >= len(lines):
+            raise ValueError(f"Faltou a linha de sucessores do bloco {block_id}.")
+        successors = [int(s) for s in lines[i].split() if int(s) != 0]
+        
+        i += 1
+
+        if block_id in blocks:
+            raise ValueError(f"Bloco {block_id} definido mais de uma vez.")
+
+        blocks[block_id] = BasicBlock(id=block_id, instructions=instructions, successors=successors)
+        block_order.append(block_id)
+
+    for block in blocks.values():
+        for successor_id in block.successors:
+            if successor_id not in blocks:
+                raise ValueError(f"Bloco {block.id} aponta para sucessor {successor_id} inexistente.")
+            blocks[successor_id].predecessors.append(block.id)
+
+    return CFG(blocks=blocks, block_order=block_order)
+
