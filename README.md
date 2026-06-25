@@ -10,7 +10,7 @@
 | 1 | Francisco Kauan Pereira Cavalcante | Núcleo comum (core) |
 | 2 | Sávio de Carvalho Soares | Liveness Analysis |
 | 3 | — | Reaching Definitions |
-| 4 | — | Available Expressions |
+| 4 | Ancelmo de Souza Lopes | Available Expressions |
 
 ---
 
