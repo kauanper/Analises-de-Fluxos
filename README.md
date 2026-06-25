@@ -111,7 +111,16 @@ python -m modules.core.test_core
 ### liveness — Liveness Analysis
 **Responsável:** Sávio de Carvalho Soares
 
-> Concluído. Determina quais variáveis estão vivas em cada ponto do programa através do motor backward do núcleo.
+> Determina quais variáveis estão vivas em cada ponto do programa através do motor backward do núcleo.
+
+- `modules/liveness/liveness.py`: lógica de inicialização do motor genérico chamando a função `run_dataflow` com a direção configurada para backward e usando a união de conjuntos (`union`). As funções gen como o `block_use()` e kill como `block_def()` foram definidas.
+
+- `modules/liveness/test_liveness.py`: script de testes para validar o código isoladamente. O teste está passando corretamente no exemplo do PDF com os valores de IN e OUT dos 3 blocos.
+
+### Como testar:
+```bash
+python -m modules.liveness.test_liveness
+```
 
 ---
 
