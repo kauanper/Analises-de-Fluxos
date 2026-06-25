@@ -8,7 +8,7 @@
 | Pessoa | Nome | Módulo |
 |---|---|---|
 | 1 | Francisco Kauan Pereira Cavalcante | Núcleo comum (core) |
-| 2 | — | Liveness Analysis |
+| 2 | Sávio de Carvalho Soares | Liveness Analysis |
 | 3 | — | Reaching Definitions |
 | 4 | — | Available Expressions |
 
@@ -109,9 +109,9 @@ python -m modules.core.test_core
 ---
 
 ### liveness — Liveness Analysis
-**Responsável:** —
+**Responsável:** Sávio de Carvalho Soares
 
-> Em desenvolvimento.
+> Concluído. Determina quais variáveis estão vivas em cada ponto do programa através do motor backward do núcleo.
 
 ---
 
