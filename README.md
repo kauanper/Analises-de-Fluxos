@@ -125,13 +125,21 @@ python -m modules.liveness.test_liveness
 ---
 
 ### reaching_definitions — Reaching Definitions
-**Responsável:** —
+**Responsável:** — 
 
 > Em desenvolvimento.
 
 ---
 
 ### available_expressions — Available Expressions
-**Responsável:** —
+**Responsável:** — Ancelmo de Souza Lopes
 
-> Em desenvolvimento.
+>  Determina quais expressões estão disponíveis em cada ponto do programa através do motor forward do núcleo.
+
+- `modules/available_expressions/available_expressions.py`: implementa a análise de expressões disponíveis (Available Expressions). A lógica principal utiliza o motor genérico `run_dataflow` configurado para execução **forward**, com operação de junção baseada em **interseção (`intersection`)**. O conjunto universo é formado por todas as expressões presentes no programa (`all_expressions`). O conjunto **GEN** contém as expressões calculadas dentro de cada bloco (`calculate_gen`), removendo aquelas invalidadas por redefinições de variáveis no próprio bloco. O conjunto **KILL** contém todas as expressões do programa que utilizam variáveis redefinidas no bloco (`calculate_kill`).
+
+- `modules/available_expressions/test_available_expressions.py`: contém testes unitários para validar a implementação da análise de expressões disponíveis de forma isolada. Os testes utilizam o exemplo do PDF da disciplina e verificam os valores esperados dos conjuntos **IN** e **OUT** para cada bloco do grafo de fluxo de controle.
+
+### Como testar:
+```bash
+python -m modules.available_expressions.test_available_expressions
