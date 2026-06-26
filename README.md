@@ -9,7 +9,7 @@
 |---|---|---|
 | 1 | Francisco Kauan Pereira Cavalcante | Núcleo comum (core) |
 | 2 | Sávio de Carvalho Soares | Liveness Analysis |
-| 3 | — | Reaching Definitions |
+| 3 | Francisco Samuel Cabral Leitão| Reaching Definitions |
 | 4 | Ancelmo de Souza Lopes | Available Expressions |
 
 ---
@@ -125,10 +125,18 @@ python -m modules.liveness.test_liveness
 ---
 
 ### reaching_definitions — Reaching Definitions
-**Responsável:** — 
+**Responsável:** Francisco Samuel Cabral Leitão
 
-> Em desenvolvimento.
+> Determina quais as definições alcançam cada ponto do programa através do motor forward do núcleo.
 
+- `modules/reaching_definitions/reaching_definitions.py`: implementa a análise de definições alcançantes (Reaching Definitions). A lógica principal utiliza o motor genérico `run_dataflow` configurado para execução **forward**, com a função de junção definida como união (`union`). O módulo efetua um pré-mapeamento global das linhas de atribuição para calcular o conjunto **KILL** de forma precisa perante redefinições. O conjunto **GEN** captura a definição mais recente de uma variável dentro do próprio bloco.
+
+- `modules/reaching_definitions/test_reaching_definitions.py`: script de testes para validar o código. O teste verifica se está passando corretamente com os valores de IN e OUT esperados para cada bloco.
+
+### Como testar:
+```bash
+python -m modules.reaching_definitions.test_reaching_definitions
+```
 ---
 
 ### available_expressions — Available Expressions
