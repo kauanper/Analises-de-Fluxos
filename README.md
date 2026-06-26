@@ -1,5 +1,5 @@
 # Trabalho II — Análises de Fluxo de Dados
-**Compiladores — Prof. Lucas Ismaily — UFC Quixadá**
+**Disciplina de Compiladores com o Prof. Lucas Ismaily — UFC Quixadá**
 
 ---
 
@@ -54,6 +54,7 @@ trabalho2-compiladores/
 │
 └── examples/                          # Entradas de teste compartilhadas
     └── example_statement.txt
+    └── test_n.txt
 ```
 
 ---
@@ -64,8 +65,15 @@ Todos os comandos devem ser rodados a partir da **raiz do projeto**.
  
 ### Integração completa
 ```bash
-python main.py examples/example_statement.txt
+python main.py examples/
 ```
+Esse comando processa **todos** os arquivos `.txt` encontrados diretamente dentro da pasta `examples/`. 
+Para testar um novo caso, basta adicionar um arquivo `.txt` (seguindo o formato de entrada esperado) 
+dentro dessa pasta, sem necessidade de alterar nenhum código. Na próxima execução do comando acima, 
+ele já será incluído automaticamente na bateria de testes.
+
+> **Nota:** a busca por arquivos não é recursiva. Apenas `.txt` no nível raiz de `examples/` 
+> são processados, não em subpastas.
 
 ### Testes de cada módulo
 ```bash
@@ -85,16 +93,9 @@ modulo/
 ├── modulo.py        # implementação da análise
 └── test_modulo.py   # testes, executável de forma independente
 ```
-<<<<<<< HEAD
- 
-O arquivo de teste de cada módulo pode ser rodado de forma isolada — sem precisar que os outros módulos estejam prontos.
- 
----
-=======
 
 O arquivo de teste de cada módulo pode ser rodado de forma isolada, sem precisar que os outros módulos estejam prontos. Cada pessoa pode implementar e validar sua análise independentemente, apenas importando o núcleo comum (`modules.core.core`) e usando os arquivos de entrada da pasta `examples/` como base de comparação. Isso significa que não há dependência de implementação entre as análises.
 
->>>>>>> 37052fb0b78769374f1b0fe60c0c9c7fc0027ed0
 
 ### core — Núcleo comum
 **Responsável:** Francisco Kauan Pereira Cavalcante
