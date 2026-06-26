@@ -1,10 +1,7 @@
+import sys
+
 from modules.liveness.liveness import run_liveness
 from modules.core.core import parse_input, print_result
-import sys
-import os
-
-sys.path.insert(0, os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '..', '..')))
 
 
 def main():
@@ -22,12 +19,23 @@ def main():
         "0"
     ]
 
+    expected = {
+        1: ({"a", "c"}, {"a", "c"}),
+        2: ({"a", "c"}, {"a", "b"}),
+        3: ({"a", "b"}, set()),
+    }
+
     if len(sys.argv) > 1:
         cfg = parse_input(sys.argv[1])
     else:
         cfg = parse_input(example_input)
 
     result = run_liveness(cfg)
+
+    if len(sys.argv) == 1:
+        assert result[1] == expected[1], result[1]
+        assert result[2] == expected[2], result[2]
+        assert result[3] == expected[3], result[3]
 
     print_result("Liveness", result, cfg.block_order)
 

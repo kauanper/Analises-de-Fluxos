@@ -10,7 +10,7 @@
 | 1 | Francisco Kauan Pereira Cavalcante | Núcleo comum (core) |
 | 2 | Sávio de Carvalho Soares | Liveness Analysis |
 | 3 | Francisco Samuel Cabral Leitão| Reaching Definitions |
-| 4 | — | Available Expressions |
+| 4 | Ancelmo de Souza Lopes | Available Expressions |
 
 ---
 
@@ -111,17 +111,43 @@ python -m modules.core.test_core
 ### liveness — Liveness Analysis
 **Responsável:** Sávio de Carvalho Soares
 
-> Concluído. Determina quais variáveis estão vivas em cada ponto do programa através do motor backward do núcleo.
+> Determina quais variáveis estão vivas em cada ponto do programa através do motor backward do núcleo.
+
+- `modules/liveness/liveness.py`: lógica de inicialização do motor genérico chamando a função `run_dataflow` com a direção configurada para backward e usando a união de conjuntos (`union`). As funções gen como o `block_use()` e kill como `block_def()` foram definidas.
+
+- `modules/liveness/test_liveness.py`: script de testes para validar o código isoladamente. O teste está passando corretamente no exemplo do PDF com os valores de IN e OUT dos 3 blocos.
+
+### Como testar:
+```bash
+python -m modules.liveness.test_liveness
+```
 
 ---
 
 ### reaching_definitions — Reaching Definitions
 **Responsável:** Francisco Samuel Cabral Leitão
 
-> Concluído. Determina quais as definições que alcançam cada ponto do programa através do motor genérico configurado para iterar de cima para baixo (`forward`) e com a função de junção definida como união (`union`). O módulo efetua um pré-mapeamento global das linhas de atribuição para calcular o conjunto `kill` de forma precisa perante redefinições.
+> Determina quais as definições alcançam cada ponto do programa através do motor forward do núcleo.
+
+- `modules/reaching_definitions/reaching_definitions.py`: implementa a análise de definições alcançantes (Reaching Definitions). A lógica principal utiliza o motor genérico `run_dataflow` configurado para execução **forward**, com a função de junção definida como união (`union`). O módulo efetua um pré-mapeamento global das linhas de atribuição para calcular o conjunto **KILL** de forma precisa perante redefinições. O conjunto **GEN** captura a definição mais recente de uma variável dentro do próprio bloco.
+
+- `modules/reaching_definitions/test_reaching_definitions.py`: script de testes para validar o código. O teste verifica se está passando corretamente com os valores de IN e OUT esperados para cada bloco.
+
+### Como testar:
+```bash
+python -m modules.reaching_definitions.test_reaching_definitions
+```
 ---
 
 ### available_expressions — Available Expressions
-**Responsável:** —
+**Responsável:** — Ancelmo de Souza Lopes
 
-> Em desenvolvimento.
+>  Determina quais expressões estão disponíveis em cada ponto do programa através do motor forward do núcleo.
+
+- `modules/available_expressions/available_expressions.py`: implementa a análise de expressões disponíveis (Available Expressions). A lógica principal utiliza o motor genérico `run_dataflow` configurado para execução **forward**, com operação de junção baseada em **interseção (`intersection`)**. O conjunto universo é formado por todas as expressões presentes no programa (`all_expressions`). O conjunto **GEN** contém as expressões calculadas dentro de cada bloco (`calculate_gen`), removendo aquelas invalidadas por redefinições de variáveis no próprio bloco. O conjunto **KILL** contém todas as expressões do programa que utilizam variáveis redefinidas no bloco (`calculate_kill`).
+
+- `modules/available_expressions/test_available_expressions.py`: contém testes unitários para validar a implementação da análise de expressões disponíveis de forma isolada. Os testes utilizam o exemplo do PDF da disciplina e verificam os valores esperados dos conjuntos **IN** e **OUT** para cada bloco do grafo de fluxo de controle.
+
+### Como testar:
+```bash
+python -m modules.available_expressions.test_available_expressions
