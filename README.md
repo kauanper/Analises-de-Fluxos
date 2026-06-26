@@ -9,7 +9,7 @@
 |---|---|---|
 | 1 | Francisco Kauan Pereira Cavalcante | Núcleo comum (core) |
 | 2 | Sávio de Carvalho Soares | Liveness Analysis |
-| 3 | — | Reaching Definitions |
+| 3 | Francisco Samuel Cabral Leitão| Reaching Definitions |
 | 4 | — | Available Expressions |
 
 ---
@@ -116,10 +116,9 @@ python -m modules.core.test_core
 ---
 
 ### reaching_definitions — Reaching Definitions
-**Responsável:** —
+**Responsável:** Francisco Samuel Cabral Leitão
 
-> Em desenvolvimento.
-
+> Concluído. Determina quais as definições que alcançam cada ponto do programa através do motor genérico configurado para iterar de cima para baixo (`forward`) e com a função de junção definida como união (`union`). O módulo efetua um pré-mapeamento global das linhas de atribuição para calcular o conjunto `kill` de forma precisa perante redefinições.
 ---
 
 ### available_expressions — Available Expressions
