@@ -77,7 +77,7 @@ modulo/
 └── test_modulo.py   # testes, executável de forma independente
 ```
  
-O arquivo de teste de cada módulo pode ser rodado de forma isolada — sem precisar que os outros módulos estejam prontos — e valida a análise contra os exemplos da pasta `examples/`.
+O arquivo de teste de cada módulo pode ser rodado de forma isolada — sem precisar que os outros módulos estejam prontos.
  
 ---
 
